@@ -2,7 +2,8 @@ package ru.nishpal.crud.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.nishpal.crud.entity.User;
+import ru.nishpal.crud.model.User;
+import ru.nishpal.crud.model.dto.UserDto;
 import ru.nishpal.crud.service.UserServiceImpl;
 
 import java.util.List;
@@ -28,8 +29,8 @@ public class UserController {
     }
 
     @GetMapping("/show")
-    public List<User> showAllUsers() {
-        return users;
+    public List<UserDto> showAllUsers() {
+        return UserDto.listOfUsersToDto(users);
     }
 
     @GetMapping("/show/{id}")
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public HttpStatus createUser(@RequestBody String json) throws Exception {
+    public HttpStatus createUser(@RequestBody String json) {
         User user = userService.parseJsonToUser(json);
         if (user == null)
             return HttpStatus.BAD_REQUEST;
@@ -47,20 +48,29 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteUserById(@PathVariable("id") int id) {
+    public HttpStatus deleteUserById(@PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
+        if (user == null)
+            return HttpStatus.BAD_REQUEST;
         this.users.remove(user);
+        return HttpStatus.OK;
     }
 
     @PatchMapping("/update-username/{id}")
     public HttpStatus updateUsersUsernameById(@RequestBody String jsonUsername, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
-        return userService.setNewUsername(jsonUsername, user);
+        if (user == null)
+            return HttpStatus.BAD_REQUEST;
+        userService.setNewUsername(jsonUsername, user);
+        return HttpStatus.OK;
     }
 
     @PutMapping("/update/{id}")
     public HttpStatus updateUserById(@RequestBody String jsonUsernameAndPassword, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
-        return userService.updateUser(jsonUsernameAndPassword, user);
+        if (user == null)
+            return HttpStatus.BAD_REQUEST;
+        userService.updateUser(jsonUsernameAndPassword, user);
+        return HttpStatus.OK;
     }
 }

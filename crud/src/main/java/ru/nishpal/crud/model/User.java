@@ -1,4 +1,4 @@
-package ru.nishpal.crud.entity;
+package ru.nishpal.crud.model;
 
 import lombok.*;
 

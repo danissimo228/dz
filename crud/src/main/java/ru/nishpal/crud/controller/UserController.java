@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @GetMapping("/show/{id}")
-    public User showUserById(@PathVariable("id") int id)  {
-        return userService.findUserById(id, users);
+    public UserDto showUserById(@PathVariable("id") int id)  {
+        return UserDto.userToDto(userService.findUserById(id, users));
     }
 
     @PostMapping("/create")

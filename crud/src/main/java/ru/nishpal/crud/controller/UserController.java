@@ -3,7 +3,7 @@ package ru.nishpal.crud.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.nishpal.crud.entity.User;
-import ru.nishpal.crud.service.UserService;
+import ru.nishpal.crud.service.UserServiceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,9 +21,9 @@ public class UserController {
             new User("Masha", "22848")
     ).collect(Collectors.toList());
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public HttpStatus createUser(@RequestBody String json) {
+    public HttpStatus createUser(@RequestBody String json) throws Exception {
         User user = userService.parseJsonToUser(json);
         if (user == null)
             return HttpStatus.BAD_REQUEST;

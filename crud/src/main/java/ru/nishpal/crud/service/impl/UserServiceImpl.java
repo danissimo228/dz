@@ -1,4 +1,4 @@
-package ru.nishpal.crud.service;
+package ru.nishpal.crud.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.nishpal.crud.model.User;
 import ru.nishpal.crud.exception.ApplicationException;
 import ru.nishpal.crud.exception.ExceptionMessage;
+import ru.nishpal.crud.service.UserService;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class UserServiceImpl implements UserService {
 
     public User parseJsonToUser(String json) {
         try {
-            JsonNode jsonNode = new ObjectMapper().readTree(json);
-            System.out.println(jsonNode.get("username").asText());
-            return new User(jsonNode.get("username").asText(), jsonNode.get("password").asText());
-        } catch (JsonProcessingException e) {
+        JsonNode jsonNode = new ObjectMapper().readTree(json);
+        System.out.println(jsonNode.get("username").asText());
+        return new User(jsonNode.get("username").asText(), jsonNode.get("password").asText());
+        } catch (JsonProcessingException | NullPointerException e) {
             throw new ApplicationException(ExceptionMessage.BAD_JSON_SERIALIZATION);
         }
     }
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
             } else {
                 throw new ApplicationException(ExceptionMessage.USER_IS_NULL);
             }
-        } catch (JsonProcessingException e) {
+        } catch (JsonProcessingException | NullPointerException e) {
             throw new ApplicationException(ExceptionMessage.BAD_JSON_SERIALIZATION);
         }
     }

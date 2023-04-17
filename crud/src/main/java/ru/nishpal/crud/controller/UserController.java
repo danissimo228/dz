@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.nishpal.crud.model.User;
 import ru.nishpal.crud.model.dto.UserDto;
-import ru.nishpal.crud.service.UserServiceImpl;
+import ru.nishpal.crud.service.impl.UserServiceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,8 +41,6 @@ public class UserController {
     @PostMapping("/create")
     public HttpStatus createUser(@RequestBody String json) {
         User user = userService.parseJsonToUser(json);
-        if (user == null)
-            return HttpStatus.BAD_REQUEST;
         this.users.add(user);
         return HttpStatus.OK;
     }
@@ -50,8 +48,6 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteUserById(@PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
-        if (user == null)
-            return HttpStatus.BAD_REQUEST;
         this.users.remove(user);
         return HttpStatus.OK;
     }
@@ -59,8 +55,6 @@ public class UserController {
     @PatchMapping("/update-username/{id}")
     public HttpStatus updateUsersUsernameById(@RequestBody String jsonUsername, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
-        if (user == null)
-            return HttpStatus.BAD_REQUEST;
         userService.setNewUsername(jsonUsername, user);
         return HttpStatus.OK;
     }
@@ -68,8 +62,6 @@ public class UserController {
     @PutMapping("/update/{id}")
     public HttpStatus updateUserById(@RequestBody String jsonUsernameAndPassword, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
-        if (user == null)
-            return HttpStatus.BAD_REQUEST;
         userService.updateUser(jsonUsernameAndPassword, user);
         return HttpStatus.OK;
     }

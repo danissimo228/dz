@@ -9,8 +9,12 @@ import ru.nishpal.crud.exception.ApplicationException;
 @AllArgsConstructor
 public class ExceptionDto {
     private String exceptionMessage;
+    private HttpStatus status;
 
     public static ExceptionDto exceptionToDto(ApplicationException applicationException) {
-        return new ExceptionDto(applicationException.getMessage());
+        return new ExceptionDto(
+                applicationException.getExceptionMessage().getExceptionMessage(),
+                applicationException.getExceptionMessage().getStatus()
+        );
     }
 }

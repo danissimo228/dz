@@ -1,6 +1,5 @@
 package ru.nishpal.crud.service;
 
-import org.springframework.http.HttpStatus;
 import ru.nishpal.crud.model.User;
 
 import java.util.List;

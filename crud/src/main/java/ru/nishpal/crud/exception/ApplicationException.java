@@ -1,10 +1,12 @@
 package ru.nishpal.crud.exception;
 
-public class ApplicationException extends RuntimeException{
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class ApplicationException extends RuntimeException {
     private ExceptionMessage exceptionMessage;
-
-    public ApplicationException(ExceptionMessage exceptionMessage) {
-        this.exceptionMessage = exceptionMessage;
-    }
 }

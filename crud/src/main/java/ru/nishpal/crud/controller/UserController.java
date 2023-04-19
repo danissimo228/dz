@@ -28,38 +28,38 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/show")
+    @GetMapping
     public List<UserDto> showAllUsers() {
         return UserDto.listOfUsersToDto(users);
     }
 
-    @GetMapping("/show/{id}")
+    @GetMapping("/{id}")
     public UserDto showUserById(@PathVariable("id") int id)  {
         return UserDto.userToDto(userService.findUserById(id, users));
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public HttpStatus createUser(@RequestBody String json) {
         User user = userService.parseJsonToUser(json);
         this.users.add(user);
         return HttpStatus.OK;
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public HttpStatus deleteUserById(@PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
         this.users.remove(user);
         return HttpStatus.OK;
     }
 
-    @PatchMapping("/update-username/{id}")
+    @PatchMapping("/{id}")
     public HttpStatus updateUsersUsernameById(@RequestBody String jsonUsername, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
         userService.setNewUsername(jsonUsername, user);
         return HttpStatus.OK;
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public HttpStatus updateUserById(@RequestBody String jsonUsernameAndPassword, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
         userService.updateUser(jsonUsernameAndPassword, user);

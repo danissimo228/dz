@@ -12,9 +12,14 @@ import ru.nishpal.crud.model.dto.ExceptionDto;
 public class ControllerAdvice {
 
     @ExceptionHandler
-    public ResponseEntity<String> handler(ApplicationException applicationException) {
-        ExceptionDto exceptionDto = ExceptionDto.exceptionToDto(applicationException);
-        log.error(exceptionDto.getExceptionMessage(), exceptionDto);
-        return new ResponseEntity<>(exceptionDto.getExceptionMessage(), exceptionDto.getStatus());
+    public ResponseEntity<ExceptionDto> handler(ApplicationException applicationException) {
+        log.error("catch exception: ", applicationException);
+        ExceptionDto exceptionDto = ExceptionDto
+                .builder()
+                .exceptionMessage(applicationException.getExceptionMessage())
+                .message(applicationException.getMessage())
+                .build();
+        log.error("return response : ExceptionDto={}", exceptionDto);
+        return ResponseEntity.status(applicationException.getExceptionMessage().getStatus()).body(exceptionDto);
     }
 }

@@ -23,7 +23,13 @@ public class UserServiceImpl implements UserService {
         try {
         JsonNode jsonNode = new ObjectMapper().readTree(json);
         System.out.println(jsonNode.get("username").asText());
-        return new User(jsonNode.get("username").asText(), jsonNode.get("password").asText());
+        return new User(
+                jsonNode.get("name").asText(),
+                jsonNode.get("lastName").asText(),
+                jsonNode.get("username").asText(),
+                jsonNode.get("mail").asText(),
+                jsonNode.get("password").asText()
+        );
         } catch (JsonProcessingException | NullPointerException e) {
             throw new ApplicationException(ExceptionMessage.BAD_JSON_SERIALIZATION);
         }

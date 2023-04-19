@@ -17,7 +17,7 @@ public class ControllerAdvice {
         ExceptionDto exceptionDto = ExceptionDto
                 .builder()
                 .exceptionMessage(applicationException.getExceptionMessage())
-                .message(applicationException.getMessage())
+                .message(applicationException.getExceptionMessage().getExceptionMessage())
                 .build();
         log.error("return response : ExceptionDto={}", exceptionDto);
         return ResponseEntity.status(applicationException.getExceptionMessage().getStatus()).body(exceptionDto);

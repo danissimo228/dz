@@ -10,11 +10,21 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 public class UserDto {
-    private int id;
+    private long id;
+
+    private String name;
+    private String lastName;
     private String username;
+    private String mail;
 
     public static UserDto userToDto(User user) {
-        return new UserDto(user.getId(), user.getUsername());
+        return new UserDto(
+                user.getId(),
+                user.getName(),
+                user.getLastName(),
+                user.getUsername(),
+                user.getMail()
+        );
     }
 
     public static List<UserDto> listOfUsersToDto(List<User> users) {

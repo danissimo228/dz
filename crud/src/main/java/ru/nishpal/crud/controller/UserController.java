@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 public class UserController {
 
     private List<User> users = Stream.of(
-            new User("test", "qwerty"),
-            new User("Dima", "1234"),
-            new User("admin", "root"),
-            new User("Masha", "22848")
+            new User("Dima", "Bobrov", "bobr777", "bobrov@gmail.com", "qwerty"),
+            new User("Dima", "Ivanov", "dimooon", "dmitriy@gmail.com", "12345"),
+            new User("Daniil", "Pirojkov", "admin", "daniil121@gmail.com", "root"),
+            new User("Masha", "Ivanova", "marusya888", "Masha555@gmail.com", "mashshaa")
     ).collect(Collectors.toList());
 
     private final UserServiceImpl userService;
@@ -38,6 +38,13 @@ public class UserController {
         return UserDto.userToDto(userService.findUserById(id, users));
     }
 
+    // TODO
+    //  1. object CreateUserDto
+    //  2. fields: String(not null), int(!= 0), Date(> currentDate)
+    //  3. annotation hibernate.validation
+    //  4. Обработчик на exception`ы в ControllerAdvice
+    //  .5 Добавить логи
+    //  6. Добавить филды в User +
     @PostMapping
     public HttpStatus createUser(@RequestBody String json) {
         User user = userService.parseJsonToUser(json);

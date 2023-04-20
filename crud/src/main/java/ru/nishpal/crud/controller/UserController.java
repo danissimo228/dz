@@ -1,5 +1,6 @@
 package ru.nishpal.crud.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.nishpal.crud.model.User;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
@@ -39,16 +40,11 @@ public class UserController {
     }
 
     // TODO
-    //  1. object CreateUserDto
-    //  2. fields: String(not null), int(!= 0), Date(> currentDate)
-    //  3. annotation hibernate.validation
-    //  4. Обработчик на exception`ы в ControllerAdvice
-    //  .5 Добавить логи
-    //  6. Добавить филды в User +
+    //  1. create object CreateUserDto fields: String(not null), int(!= 0), Date(> currentDate)
     @PostMapping
     public HttpStatus createUser(@RequestBody String json) {
-        User user = userService.parseJsonToUser(json);
-        this.users.add(user);
+        userService.parseJsonToUser(json, this.users);
+        log.info("Create user: {}", users.get(users.size()-1));
         return HttpStatus.OK;
     }
 
@@ -56,6 +52,7 @@ public class UserController {
     public HttpStatus deleteUserById(@PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
         this.users.remove(user);
+        log.info("Delete user: {}", user);
         return HttpStatus.OK;
     }
 
@@ -63,6 +60,7 @@ public class UserController {
     public HttpStatus updateUsersUsernameById(@RequestBody String jsonUsername, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
         userService.setNewUsername(jsonUsername, user);
+        log.info("Updated username for user: {}", user);
         return HttpStatus.OK;
     }
 
@@ -70,6 +68,7 @@ public class UserController {
     public HttpStatus updateUserById(@RequestBody String jsonUsernameAndPassword, @PathVariable("id") int id) {
         User user = userService.findUserById(id, users);
         userService.updateUser(jsonUsernameAndPassword, user);
+        log.info("Update user by id: {}", user);
         return HttpStatus.OK;
     }
 }

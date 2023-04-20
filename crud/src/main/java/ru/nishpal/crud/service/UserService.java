@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
     User findUserById(int id, List<User> users);
-    User parseJsonToUser(String json);
+    void parseJsonToUser(String json, List<User> users);
     void setNewUsername(String json, User user);
     void updateUser(String json, User user);
 }

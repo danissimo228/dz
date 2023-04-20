@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
+import ru.nishpal.crud.annotation.processing.ProcessingAnnotation;
 import ru.nishpal.crud.model.User;
 import ru.nishpal.crud.exception.ApplicationException;
 import ru.nishpal.crud.exception.ExceptionMessage;
@@ -19,17 +20,17 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
     }
 
-    public User parseJsonToUser(String json) {
+    public void parseJsonToUser(String json, List<User> users) {
         try {
         JsonNode jsonNode = new ObjectMapper().readTree(json);
-        System.out.println(jsonNode.get("username").asText());
-        return new User(
+        User user = new User(
                 jsonNode.get("name").asText(),
                 jsonNode.get("lastName").asText(),
                 jsonNode.get("username").asText(),
                 jsonNode.get("mail").asText(),
                 jsonNode.get("password").asText()
         );
+        if (ProcessingAnnotation.checkFields(user)) users.add(user);
         } catch (JsonProcessingException | NullPointerException e) {
             throw new ApplicationException(ExceptionMessage.BAD_JSON_SERIALIZATION);
         }
@@ -39,7 +40,8 @@ public class UserServiceImpl implements UserService {
         try {
             JsonNode jsonNode = new ObjectMapper().readTree(json);
             if (user != null) {
-                user.setUsername(jsonNode.get("username").asText());
+                    user.setUsername(jsonNode.get("username").asText());
+                    ProcessingAnnotation.checkFields(user);
             } else {
                 throw new ApplicationException(ExceptionMessage.USER_IS_NULL);
             }
@@ -54,6 +56,7 @@ public class UserServiceImpl implements UserService {
             if (user != null) {
                 user.setUsername(jsonNode.get("username").asText());
                 user.setPassword(jsonNode.get("password").asText());
+                ProcessingAnnotation.checkFields(user);
             }
             throw new ApplicationException(ExceptionMessage.USER_IS_NULL);
         } catch (JsonProcessingException | NullPointerException e) {

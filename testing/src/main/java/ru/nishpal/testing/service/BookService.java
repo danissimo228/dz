@@ -6,8 +6,9 @@ import ru.nishpal.testing.model.dto.BookDto;
 import java.util.List;
 
 public interface BookService {
-    Book findBookById(long id, List<Book> books);
-    List<Book> findBooksByGenre(List<Book> books, String genre);
-    void createBook(BookDto bookDto, List<Book> books);
-    void deleteBookById(long id, List<Book> books);
+    List<Book> findAllBooks();
+    Book findBookById(long id);
+    List<Book> findBooksByGenre(String genre);
+    void createBook(BookDto bookDto);
+    void deleteBookById(long id);
 }

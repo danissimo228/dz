@@ -1,7 +1,6 @@
 package ru.nishpal.testing.service.impl;
 
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import ru.nishpal.testing.exception.ApplicationException;
 import ru.nishpal.testing.exception.ExceptionMessage;
 import ru.nishpal.testing.model.Book;

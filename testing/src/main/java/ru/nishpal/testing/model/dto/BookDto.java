@@ -15,7 +15,7 @@ public class BookDto {
     @NotNull(message = "Book name is null")
     @Size(min = 4, max = 30, message = "Book name is too short oe long")
     private String nameBook;
-    @NotNull(message = "officename.notempty")
+    @NotNull(message = "Author is empty")
     @Size(min = 4, max = 30, message = "Author is too short oe long")
     private String author;
     @NotNull(message = "Genre is null")

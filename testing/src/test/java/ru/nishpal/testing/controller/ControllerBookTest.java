@@ -7,6 +7,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.nishpal.testing.exception.ApplicationException;
+import ru.nishpal.testing.exception.ExceptionMessage;
 import ru.nishpal.testing.model.dto.BookDto;
 import ru.nishpal.testing.service.BookService;
 
@@ -77,6 +79,18 @@ class ControllerBookTest {
     }
 
     @Test
+    public void deleteBook_whenBookIsNotFound_thenStatus400AndReturnsApplicationExceptionBookNotFound() throws Exception {
+        long id = bookService.findAllBooks().size() + 1;
+
+        mockMvc.perform(
+                        delete(URL + "/" + id))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(mvcResult ->
+                    mvcResult.getResolvedException().equals(new ApplicationException(ExceptionMessage.BOOK_NOT_FOUND)));
+    }
+
+    @Test
     public void postBook_whenCreateBook_thenStatus200AndLastBookEqualsCreatedBook() throws Exception {
         BookDto bookDto = new BookDto("test-post", "test-post", "test-post");
 
@@ -86,5 +100,16 @@ class ControllerBookTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void postBook_whenBookIsNull_thenStatus400AndReturnsApplicationExceptionBookIsNull() throws Exception {
+        mockMvc.perform(
+                post(URL)
+                        .content(objectMapper.writeValueAsString(null))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(mvcResult ->
+                        mvcResult.getResolvedException().equals(new ApplicationException(ExceptionMessage.BOOK_IS_NULL)));
     }
 }

@@ -17,11 +17,11 @@ public class UserController {
 
     @PostMapping
     public UserDto createUser(@Valid @RequestBody UserDto userDto) {
-        log.info("Get request for create user: {}", userDto);
+        log.info("Get request for created user: {}", userDto);
 
         User user = UserDto.dtoToUser(userDto, 1);
 
-        log.info("Return response for create user: {}", user);
+        log.info("Return response for created user: {}", user);
 
         return userDto;
     }

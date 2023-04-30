@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet  author="me"  id="1">
+        <insert tableName="users"
+                dbms="postgres">
+            <column  name="id"  value="1"/>
+            <column  name="username"  value="rootT"/>
+            <column  name="email"  value="root@gmail.com"/>
+            <column  name="password"  value="rootT"/>
+        </insert>
+    </changeSet>
+
+    <changeSet  author="me"  id="2">
+        <insert tableName="users"
+                dbms="postgres">
+            <column  name="id"  value="2"/>
+            <column  name="username"  value="migrations"/>
+            <column  name="email"  value="migrations@gmail.com"/>
+            <column  name="password"  value="migrations"/>
+        </insert>
+    </changeSet>
+
+    <changeSet  author="me"  id="3">
+        <insert tableName="users"
+                dbms="postgres">
+            <column  name="id"  value="3"/>
+            <column  name="username"  value="danissimo228"/>
+            <column  name="email"  value="danissimo228@gmail.com"/>
+            <column  name="password"  value="DDaniss"/>
+        </insert>
+    </changeSet>
+    </databaseChangeLog>

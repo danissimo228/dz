@@ -7,4 +7,5 @@ spring:
   jpa:
     hibernate.ddl-auto: update
   liquibase:
-    change-log: classpath:/db.changelog/changelog.xml
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+    contexts: test

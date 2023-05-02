@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet  author="Daniil"  id="insert-data-users" context="test">
+        <insert tableName="users">
+            <column  name="id"  value="1"/>
+            <column  name="username"  value="test"/>
+            <column  name="email"  value="test@gmail.com"/>
+            <column  name="password"  value="qwerty"/>
+        </insert>
+    </changeSet>
+
+    <changeSet  author="Daniil"  id="insert-data-users1" context="test">
+        <insert tableName="users">
+            <column  name="id"  value="2"/>
+            <column  name="username"  value="danissimo"/>
+            <column  name="email"  value="danissimo@gmail.com"/>
+            <column  name="password"  value="qw22erty"/>
+        </insert>
+    </changeSet>
+
+    <changeSet  author="Daniil"  id="insert-data-users2" context="test">
+        <insert tableName="users">
+            <column  name="id"  value="3"/>
+            <column  name="username"  value="Misha"/>
+            <column  name="email"  value="misha@gmail.com"/>
+            <column  name="password"  value="misha1999"/>
+        </insert>
+    </changeSet>
+
+    <changeSet  author="Daniil"  id="insert-data-users3" context="test">
+        <insert tableName="users">
+            <column  name="id"  value="4"/>
+            <column  name="username"  value="admin"/>
+            <column  name="email"  value="admin@gmail.com"/>
+            <column  name="password"  value="root"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

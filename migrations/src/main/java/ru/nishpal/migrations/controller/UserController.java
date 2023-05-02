@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/api/v1/user")
 public class UserController {
     private final UserService userService;
-
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -27,6 +26,12 @@ public class UserController {
     public void postUser(@Valid @RequestBody UserDto userDto) {
         log.info("Get request for post user: {}", userDto);
         userService.createUser(userDto);
+    }
+
+    @PutMapping("/{id}")
+    public void patchUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
+        log.info("Get request for put user: {}", userDto);
+        userService.updateUser(id, userDto);
     }
 
     @DeleteMapping("/{id}")

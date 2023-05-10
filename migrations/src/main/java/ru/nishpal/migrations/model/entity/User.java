@@ -2,6 +2,7 @@ package ru.nishpal.migrations.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -11,7 +12,11 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customIdGenerator")
+    @GenericGenerator(
+            name = "customIdGenerator",
+            strategy = "ru.nishpal.migrations.generator.CustomIdGenerator"
+    )
     private Long id;
 
     @Column(name = "username")

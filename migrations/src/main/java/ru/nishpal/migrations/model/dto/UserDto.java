@@ -17,9 +17,11 @@ public class UserDto {
     @Size(min = 4, max = 20)
     private String username;
 
+    @NotEmpty
     @Email
     private String email;
 
+    @NotEmpty
     @Size(min = 4, max = 20)
     private String password;
 

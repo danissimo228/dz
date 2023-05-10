@@ -19,13 +19,13 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getAllUsers() {
-        return UserDto.UserListToDto(userService.findAllUsers());
+        return userService.findAllUsers();
     }
 
     @PostMapping
-    public void postUser(@Valid @RequestBody UserDto userDto) {
+    public UserDto postUser(@Valid @RequestBody UserDto userDto) {
         log.info("Get request for post user: {}", userDto);
-        userService.createUser(userDto);
+        return userService.createUser(userDto);
     }
 
     @PutMapping("/{id}")

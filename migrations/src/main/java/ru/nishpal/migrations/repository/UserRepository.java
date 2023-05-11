@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.nishpal.migrations.model.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    boolean existsByEmailAndUsername(String email, String username);
 }

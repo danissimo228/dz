@@ -7,7 +7,7 @@
 
     <changeSet  author="Daniil"  id="insert-data-users" context="test">
         <insert tableName="users">
-            <column  name="id"  value="1"/>
+            <column  name="id"  valueSequenceNext="users_seq"/>
             <column  name="username"  value="test"/>
             <column  name="email"  value="test@gmail.com"/>
             <column  name="password"  value="qwerty"/>
@@ -16,7 +16,7 @@
 
     <changeSet  author="Daniil"  id="insert-data-users1" context="test">
         <insert tableName="users">
-            <column  name="id"  value="2"/>
+            <column  name="id"  valueSequenceNext="users_seq"/>
             <column  name="username"  value="danissimo"/>
             <column  name="email"  value="danissimo@gmail.com"/>
             <column  name="password"  value="qw22erty"/>
@@ -25,7 +25,7 @@
 
     <changeSet  author="Daniil"  id="insert-data-users2" context="test">
         <insert tableName="users">
-            <column  name="id"  value="3"/>
+            <column  name="id"  valueSequenceNext="users_seq"/>
             <column  name="username"  value="Misha"/>
             <column  name="email"  value="misha@gmail.com"/>
             <column  name="password"  value="misha1999"/>
@@ -34,7 +34,7 @@
 
     <changeSet  author="Daniil"  id="insert-data-users3" context="test">
         <insert tableName="users">
-            <column  name="id"  value="4"/>
+            <column  name="id"  valueSequenceNext="users_seq"/>
             <column  name="username"  value="admin"/>
             <column  name="email"  value="admin@gmail.com"/>
             <column  name="password"  value="root"/>

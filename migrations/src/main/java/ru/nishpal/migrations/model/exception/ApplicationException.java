@@ -1,4 +1,4 @@
-package ru.nishpal.migrations.exception;
+package ru.nishpal.migrations.model.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

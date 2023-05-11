@@ -25,18 +25,25 @@ public class UserController {
     @PostMapping
     public UserDto postUser(@Valid @RequestBody UserDto userDto) {
         log.info("Get request for post user: {}", userDto);
-        return userService.createUser(userDto);
+        UserDto createdUser = userService.createUser(userDto);
+        log.info("Created user: {}", createdUser);
+        return createdUser;
     }
 
     @PutMapping("/{id}")
-    public void patchUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
+    public UserDto putUser(@PathVariable Long id,
+                           @Valid @RequestBody UserDto userDto) {
         log.info("Get request for put user: {}", userDto);
-        userService.updateUser(id, userDto);
+        UserDto updatedUser = userService.putUser(id, userDto);
+        log.info("Updated user: {}", updatedUser);
+        return updatedUser;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public UserDto deleteUser(@PathVariable Long id) {
         log.info("Get request for delete user: {}", id);
-        userService.deleteUser(id);
+        UserDto deletedUser =  userService.deleteUser(id);
+        log.info("Deleted user: {}", deletedUser);
+        return deletedUser;
     }
 }

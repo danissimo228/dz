@@ -2,7 +2,6 @@ package ru.nishpal.migrations.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -12,17 +11,20 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(generator = "customIdGenerator")
-    @GenericGenerator(
-            name = "customIdGenerator",
-            strategy = "ru.nishpal.migrations.generator.CustomIdGenerator"
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "users_seq"
+    )
+    @SequenceGenerator(
+            name = "users_seq",
+            sequenceName = "users_seq", allocationSize = 1
     )
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")

@@ -1,4 +1,4 @@
-package ru.nishpal.migrations.exception;
+package ru.nishpal.migrations.model.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ExceptionMessage {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User is not found"),
-    USERS_NOT_FOUND(HttpStatus.NOT_FOUND, "Users is not found"),
-    FIELD_NOT_VALID(HttpStatus.BAD_REQUEST, "Field in user not valid");
+    FIELD_NOT_VALID(HttpStatus.BAD_REQUEST, "Field in user not valid"),
+    FIELD_NOT_UNIQUE(HttpStatus.BAD_REQUEST, "This username or email is already taken");
 
     private final HttpStatus status;
     private final String message;

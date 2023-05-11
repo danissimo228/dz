@@ -3,7 +3,7 @@ package ru.nishpal.migrations.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import ru.nishpal.migrations.exception.ExceptionMessage;
+import ru.nishpal.migrations.model.exception.ExceptionMessage;
 
 @Data
 @Builder

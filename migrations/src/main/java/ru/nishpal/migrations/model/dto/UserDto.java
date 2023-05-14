@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserDto {
     @NotEmpty
+    private Long id;
+    @NotEmpty
     @Size(min = 4, max = 20)
     private String username;
 
@@ -27,17 +29,10 @@ public class UserDto {
 
     public static UserDto userToDto(User user) {
         return new UserDto(
+                user.getId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword()
-        );
-    }
-
-    public static User dtoToUser(UserDto userDto) {
-        return new User(
-                userDto.getUsername(),
-                userDto.getEmail(),
-                userDto.getPassword()
         );
     }
 

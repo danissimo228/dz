@@ -1,12 +1,14 @@
 package ru.nishpal.migrations.service;
 
+import ru.nishpal.migrations.model.dto.CreateUserDto;
+import ru.nishpal.migrations.model.dto.UpdateUserDto;
 import ru.nishpal.migrations.model.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
     List<UserDto> findAllUsers();
-    UserDto createUser(UserDto userDto);
+    CreateUserDto createUser(CreateUserDto createUserDto);
     UserDto deleteUser(long id);
-    UserDto putUser(long id, UserDto userDto);
+    UpdateUserDto putUser(long id, UpdateUserDto updateUserDto);
 }

@@ -2,6 +2,8 @@ package ru.nishpal.migrations.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
+import ru.nishpal.migrations.model.dto.CreateUserDto;
+import ru.nishpal.migrations.model.dto.UpdateUserDto;
 import ru.nishpal.migrations.model.dto.UserDto;
 import ru.nishpal.migrations.service.UserService;
 
@@ -23,27 +25,36 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto postUser(@Valid @RequestBody UserDto userDto) {
-        log.info("Get request for post user: {}", userDto);
-        UserDto createdUser = userService.createUser(userDto);
+    public CreateUserDto postUser(@Valid @RequestBody CreateUserDto createUserDto) {
+        log.info("Get request for post user: {}", createUserDto);
+
+        CreateUserDto createdUser = userService.createUser(createUserDto);
+
         log.info("Created user: {}", createdUser);
+
         return createdUser;
     }
 
     @PutMapping("/{id}")
-    public UserDto putUser(@PathVariable Long id,
-                           @Valid @RequestBody UserDto userDto) {
-        log.info("Get request for put user: {}", userDto);
-        UserDto updatedUser = userService.putUser(id, userDto);
+    public UpdateUserDto putUser(@PathVariable Long id,
+                           @Valid @RequestBody UpdateUserDto updateUserDto) {
+        log.info("Get request for put user: {}", updateUserDto);
+
+        UpdateUserDto updatedUser = userService.putUser(id, updateUserDto);
+
         log.info("Updated user: {}", updatedUser);
+
         return updatedUser;
     }
 
     @DeleteMapping("/{id}")
     public UserDto deleteUser(@PathVariable Long id) {
         log.info("Get request for delete user: {}", id);
+
         UserDto deletedUser =  userService.deleteUser(id);
+
         log.info("Deleted user: {}", deletedUser);
+
         return deletedUser;
     }
 }

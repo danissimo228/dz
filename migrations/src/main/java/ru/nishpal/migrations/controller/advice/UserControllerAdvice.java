@@ -34,16 +34,4 @@ public class UserControllerAdvice {
         log.error("return response: ExceptionDto={}", exceptionDto);
         return ResponseEntity.status(exceptionDto.getExceptionMessage().getStatus()).body(exceptionDto);
     }
-
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    public ResponseEntity<ExceptionDto> handleFieldNotUniqueException(DataIntegrityViolationException exception) {
-//        log.error("catch error: ", exception);
-//        ExceptionDto exceptionDto = ExceptionDto
-//                .builder()
-//                .exceptionMessage(new ApplicationException(ExceptionMessage.FIELD_NOT_UNIQUE).getExceptionMessage())
-//                .message(exception.getMessage())
-//                .build();
-//        log.error("return response: ExceptionDto={}", exceptionDto);
-//        return ResponseEntity.status(exceptionDto.getExceptionMessage().getStatus()).body(exceptionDto);
-//    }
 }

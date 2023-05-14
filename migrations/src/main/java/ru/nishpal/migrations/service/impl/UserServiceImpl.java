@@ -1,6 +1,8 @@
 package ru.nishpal.migrations.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.nishpal.migrations.model.dto.CreateUserDto;
+import ru.nishpal.migrations.model.dto.UpdateUserDto;
 import ru.nishpal.migrations.model.exception.ApplicationException;
 import ru.nishpal.migrations.model.exception.ExceptionMessage;
 import ru.nishpal.migrations.model.dto.UserDto;
@@ -25,13 +27,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(UserDto userDto) {
-        if (userRepository.existsByEmailAndUsername(userDto.getEmail(), userDto.getUsername())) {
+    public CreateUserDto createUser(CreateUserDto createUserDto) {
+        if (userRepository.existsByEmailAndUsername(createUserDto.getEmail(), createUserDto.getUsername())) {
             throw new ApplicationException(ExceptionMessage.FIELD_NOT_UNIQUE);
         }
-        User user = UserDto.dtoToUser(userDto);
+        User user = CreateUserDto.createUserDtoToUser(createUserDto);
         userRepository.save(user);
-        return userDto;
+        return createUserDto;
     }
 
     @Override
@@ -43,20 +45,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto putUser(long id, UserDto userDto) {
-        if (userRepository.findById(id).isEmpty()) {
+    public UpdateUserDto putUser(long id, UpdateUserDto updateUserDto) {
+        if (!userRepository.existsById(id)) {
             throw new ApplicationException(ExceptionMessage.USER_NOT_FOUND);
         }
-        if (userRepository.existsByEmailAndUsername(userDto.getEmail(), userDto.getUsername())) {
+        if (userRepository.existsByEmailAndUsername(updateUserDto.getEmail(), updateUserDto.getUsername())) {
             throw new ApplicationException(ExceptionMessage.FIELD_NOT_UNIQUE);
         }
         User user = userRepository.findById(id).get();
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(user.getPassword());
+        UpdateUserDto.updateUserDtoToUser(updateUserDto, user);
 
         userRepository.save(user);
 
-        return UserDto.userToDto(user);
+        return updateUserDto;
     }
 }
